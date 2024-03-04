@@ -38,7 +38,6 @@ GarrysMod::Lua::ILuaInterface* Pointers::getinterface(unsigned char interfaceTyp
 {
 	switch (interfaceType)
 	{
-		default:
 		case lua_interface::client:
 			return this->pLuaInterfaceClient;
 	
@@ -47,6 +46,9 @@ GarrysMod::Lua::ILuaInterface* Pointers::getinterface(unsigned char interfaceTyp
 
 		case lua_interface::menu:
 			return this->pLuaInterfaceMenu;
+
+		default:
+			return nullptr;
 	}
 }
 
