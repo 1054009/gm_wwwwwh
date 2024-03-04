@@ -7,6 +7,13 @@ void BaseLibrary::pushcfunction(GarrysMod::Lua::CFunc function, const char* szNa
 	this->pInterface->RawSet(-3);
 }
 
+void BaseLibrary::pushnumber(double number, const char* szName)
+{
+	this->pInterface->PushString(szName);
+	this->pInterface->PushNumber(number);
+	this->pInterface->RawSet(-3);
+}
+
 void BaseLibrary::setinterface(GarrysMod::Lua::ILuaInterface* pInterface)
 {
 	if (!pInterface)

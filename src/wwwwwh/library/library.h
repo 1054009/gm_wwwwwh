@@ -13,6 +13,7 @@ public:
 	GarrysMod::Lua::ILuaInterface* pInterface;
 
 	void pushcfunction(GarrysMod::Lua::CFunc function, const char* szName);
+	void pushnumber(double number, const char* szName);
 	void setinterface(GarrysMod::Lua::ILuaInterface* pInterface);
 
 	virtual void setup() = 0;
