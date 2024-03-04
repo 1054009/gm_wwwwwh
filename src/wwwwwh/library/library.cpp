@@ -2,6 +2,7 @@
 
 #include "wwwwwh/library/library.h"
 #include "wwwwwh/library/io/io.h"
+#include "wwwwwh/library/lua/lua.h"
 #include "wwwwwh/library/module/module.h"
 
 void LibraryController::addlibrary(BaseLibrary* library)
@@ -16,6 +17,7 @@ void LibraryController::setup()
 {
 	// Initialize the libraries
 	this->addlibrary(new LibraryIO());
+	this->addlibrary(new LibraryLua());
 	this->addlibrary(new LibraryModule());
 }
 
