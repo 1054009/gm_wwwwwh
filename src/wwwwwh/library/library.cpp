@@ -4,11 +4,6 @@
 #include "wwwwwh/library/io/io.h"
 #include "wwwwwh/library/module/module.h"
 
-/*
-
-	Globals
-
-*/
 void LibraryController::addlibrary(BaseLibrary* library)
 {
 	library->setinterface(this->pInterface);
