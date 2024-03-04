@@ -10,10 +10,8 @@ public:
 
 	GarrysMod::Lua::ILuaShared* pLuaShared = nullptr;
 
-	GarrysMod::Lua::ILuaBase* pLuaClient = nullptr;
-	GarrysMod::Lua::ILuaBase* pLuaMenu = nullptr;
-
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceClient = nullptr;
+	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
 
 	GarrysMod::Lua::ILuaInterface* getinterface(unsigned char interfaceType); // Stupid cyclic reference garbage trash

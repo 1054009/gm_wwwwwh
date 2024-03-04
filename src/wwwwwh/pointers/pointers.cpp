@@ -16,20 +16,21 @@ void Pointers::setup()
 	this->pLuaShared = pLuaShared;
 
 	// Get the interfaces
-	this->pLuaClient = pLuaShared->GetLuaInterface(0); // 0 is client. 1 is server. 2 is menu
-	this->pLuaInterfaceClient = (GarrysMod::Lua::ILuaInterface*)this->pLuaClient;
+	this->pLuaInterfaceClient = pLuaShared->GetLuaInterface(0); // 0 is client. 1 is server. 2 is menu
+	this->pLuaInterfaceServer = pLuaShared->GetLuaInterface(1);
+	this->pLuaInterfaceMenu = pLuaShared->GetLuaInterface(2);
 
-	this->pLuaMenu = pLuaShared->GetLuaInterface(2);
-	this->pLuaInterfaceMenu = (GarrysMod::Lua::ILuaInterface*)this->pLuaMenu;
-
-	// Let them know
+	// Fun facts
 	globals->msgc({ { COLOR_WHITE, "Lua Shared: " }, { COLOR_BLUE, globals->tohex(pLuaShared) } });
 	globals->msgn();
 
-	globals->msgc({ { COLOR_WHITE, "Client Lua State: " }, { COLOR_BLUE, globals->tohex(this->pLuaClient) } });
+	globals->msgc({ { COLOR_WHITE, "Client Lua State: " }, { COLOR_BLUE, globals->tohex(this->pLuaInterfaceClient) } });
 	globals->msgn();
 
-	globals->msgc({ { COLOR_WHITE, "Menu Lua State: " }, { COLOR_BLUE, globals->tohex(this->pLuaMenu) } });
+	globals->msgc({ { COLOR_WHITE, "Server Lua State: " }, { COLOR_BLUE, globals->tohex(this->pLuaInterfaceServer) } });
+	globals->msgn();
+
+	globals->msgc({ { COLOR_WHITE, "Menu Lua State: " }, { COLOR_BLUE, globals->tohex(this->pLuaInterfaceMenu) } });
 	globals->msgn();
 }
 
@@ -42,7 +43,7 @@ GarrysMod::Lua::ILuaInterface* Pointers::getinterface(unsigned char interfaceTyp
 			return this->pLuaInterfaceClient;
 	
 		case lua_interface::server:
-			return nullptr;
+			return this->pLuaInterfaceServer;
 
 		case lua_interface::menu:
 			return this->pLuaInterfaceMenu;
