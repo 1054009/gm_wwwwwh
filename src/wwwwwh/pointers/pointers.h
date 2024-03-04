@@ -16,4 +16,8 @@ public:
 
 	GarrysMod::Lua::ILuaInterface* getinterface(unsigned char interfaceType); // Stupid cyclic reference garbage trash
 	GarrysMod::Lua::ILuaInterface* getorigininterface();
+
+	int getinterfacetype(GarrysMod::Lua::ILuaInterface* pInterface);
+	std::string getinterfacename(unsigned char interfaceType);
+	std::string getinterfacename(GarrysMod::Lua::ILuaInterface* pInterface);
 };
