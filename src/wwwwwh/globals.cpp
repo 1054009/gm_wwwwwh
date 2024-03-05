@@ -8,16 +8,19 @@ wwwwwh::wwwwwh()
 	this->pPointers = new Pointers();
 
 	this->pLibrary = new LibraryController();
+
+	this->pHooks = new Hooks();
 }
 
 void wwwwwh::setup(GarrysMod::Lua::ILuaInterface* pOriginInterface)
 {
 	this->pPointers->setup();
 
-	// Push the globals to wherever we were included from
-	this->pLibrary->setinterface(pOriginInterface);
+	this->pLibrary->setinterface(pOriginInterface); // Push the globals to wherever we were loaded from
 	this->pLibrary->setup();
 	this->pLibrary->pushtointerface();
+
+	this->pHooks->setup();
 }
 
 void wwwwwh::destroy()
@@ -27,7 +30,10 @@ void wwwwwh::destroy()
 	assert(pInterface);
 
 	this->pPointers->destroy();
+
 	this->pLibrary->popfrominterface();
+
+	this->pHooks->destroy();
 }
 
 std::string wwwwwh::tohex(void* pBlob)

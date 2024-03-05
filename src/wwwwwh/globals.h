@@ -36,6 +36,7 @@ public:
 
 	Pointers* pPointers;
 	LibraryController* pLibrary;
+	Hooks* pHooks;
 
 	std::string tohex(void* pBlob);
 
