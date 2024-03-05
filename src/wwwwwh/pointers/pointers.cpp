@@ -4,6 +4,7 @@
 #include "wwwwwh/globals.h"
 
 #include <d3d9.h>
+#include <d3d9types.h>
 #include <format>
 #include <string>
 #include <WinUser.h>
