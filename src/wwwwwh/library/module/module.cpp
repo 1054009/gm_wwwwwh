@@ -2,6 +2,8 @@
 
 #include "wwwwwh/globals.h"
 
+#undef GetObject // Dumb
+
 LUA_FUNCTION(Unload)
 {
 	// Remove from global table
