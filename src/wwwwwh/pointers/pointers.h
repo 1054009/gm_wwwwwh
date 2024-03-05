@@ -15,6 +15,8 @@ public:
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
 
+	IDirect3DDevice9* pD3DDevice = nullptr;
+
 	void msgaddress(std::string name, void* pObject);
 
 	GarrysMod::Lua::ILuaInterface* getinterface(unsigned char interfaceType); // Stupid cyclic reference garbage trash
