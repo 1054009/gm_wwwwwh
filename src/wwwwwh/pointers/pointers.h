@@ -1,6 +1,5 @@
 #pragma once
 
-#include <d3d9.h>
 #include <GarrysMod/Lua/LuaShared.h>
 #include <GarrysMod/Lua/LuaInterface.h>
 
@@ -15,10 +14,6 @@ public:
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceClient = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
-
-	D3DPRESENT_PARAMETERS presentParameters;
-	IDirect3D9* pDirectX = nullptr;
-	IDirect3DDevice9* pDirectXDevice = nullptr;
 
 	void msgaddress(std::string name, void* pObject);
 
