@@ -26,6 +26,7 @@ void wwwwwh::destroy()
 
 	assert(pInterface);
 
+	this->pPointers->destroy();
 	this->pLibrary->popfrominterface();
 }
 

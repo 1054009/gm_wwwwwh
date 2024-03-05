@@ -8,6 +8,7 @@ class Pointers
 {
 public:
 	void setup();
+	void destroy();
 
 	GarrysMod::Lua::ILuaShared* pLuaShared = nullptr;
 
@@ -15,7 +16,9 @@ public:
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
 
-	IDirect3DDevice9* pD3DDevice = nullptr;
+	D3DPRESENT_PARAMETERS presentParameters;
+	IDirect3D9* pDirectX = nullptr;
+	IDirect3DDevice9* pDirectXDevice = nullptr;
 
 	void msgaddress(std::string name, void* pObject);
 

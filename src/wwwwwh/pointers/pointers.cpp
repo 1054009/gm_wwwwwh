@@ -3,8 +3,10 @@
 
 #include "wwwwwh/globals.h"
 
+#include <d3d9.h>
 #include <format>
 #include <string>
+#include <WinUser.h>
 
 #define LUA_SHARED_INTERFACE_VERSION "LUASHARED003"
 
@@ -23,11 +25,42 @@ void Pointers::setup()
 	this->pLuaInterfaceServer = pLuaShared->GetLuaInterface(lua_interface::server);
 	this->pLuaInterfaceMenu = pLuaShared->GetLuaInterface(lua_interface::menu);
 
+	this->pDirectX = Direct3DCreate9(D3D_SDK_VERSION);
+	if (this->pDirectX)
+	{
+		ZeroMemory(&this->presentParameters, sizeof(this->presentParameters));
+
+		this->msgaddress("Active Window", GetActiveWindow());
+
+		this->pDirectX->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, GetActiveWindow(), D3DCREATE_HARDWARE_VERTEXPROCESSING, &this->presentParameters, &this->pDirectXDevice);
+	}
+
 	// Fun facts
 	this->msgaddress("Lua Shared", pLuaShared);
 	this->msgaddress("Client Lua State", this->pLuaInterfaceClient);
 	this->msgaddress("Server Lua State", this->pLuaInterfaceServer);
 	this->msgaddress("Menu Lua State", this->pLuaInterfaceMenu);
+	this->msgaddress("DirectX Context", this->pDirectX);
+	this->msgaddress("DirectX Device", this->pDirectXDevice);
+}
+
+void Pointers::destroy()
+{
+	if (this->pDirectXDevice)
+	{
+		this->pDirectXDevice->Release();
+
+		globals->msgc({ { COLOR_WHITE, "Released DirectX Device" } });
+		globals->msgn();
+	}
+
+	if (this->pDirectX)
+	{
+		this->pDirectX->Release();
+
+		globals->msgc({ { COLOR_WHITE, "Released DirectX Context" } });
+		globals->msgn();
+	}
 }
 
 void Pointers::msgaddress(std::string name, void* pObject)
