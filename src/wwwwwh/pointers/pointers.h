@@ -1,5 +1,6 @@
 #pragma once
 
+#include <d3d9.h>
 #include <GarrysMod/Lua/LuaShared.h>
 #include <GarrysMod/Lua/LuaInterface.h>
 
@@ -13,6 +14,8 @@ public:
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceClient = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
+
+	void msgaddress(std::string name, void* pObject);
 
 	GarrysMod::Lua::ILuaInterface* getinterface(unsigned char interfaceType); // Stupid cyclic reference garbage trash
 	GarrysMod::Lua::ILuaInterface* getorigininterface();

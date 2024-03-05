@@ -3,6 +3,9 @@
 
 #include "wwwwwh/globals.h"
 
+#include <format>
+#include <string>
+
 #define LUA_SHARED_INTERFACE_VERSION "LUASHARED003"
 
 void Pointers::setup()
@@ -21,16 +24,19 @@ void Pointers::setup()
 	this->pLuaInterfaceMenu = pLuaShared->GetLuaInterface(lua_interface::menu);
 
 	// Fun facts
-	globals->msgc({ { COLOR_WHITE, "Lua Shared: " }, { COLOR_BLUE, globals->tohex(pLuaShared) } });
-	globals->msgn();
+	this->msgaddress("Lua Shared", pLuaShared);
+	this->msgaddress("Client Lua State", this->pLuaInterfaceClient);
+	this->msgaddress("Server Lua State", this->pLuaInterfaceServer);
+	this->msgaddress("Menu Lua State", this->pLuaInterfaceMenu);
+}
 
-	globals->msgc({ { COLOR_WHITE, "Client Lua State: " }, { this->pLuaInterfaceClient ? COLOR_BLUE : COLOR_RED, globals->tohex(this->pLuaInterfaceClient) } });
-	globals->msgn();
+void Pointers::msgaddress(std::string name, void* pObject)
+{
+	name = std::format("{}: ", name);
 
-	globals->msgc({ { COLOR_WHITE, "Server Lua State: " }, { this->pLuaInterfaceServer ? COLOR_BLUE : COLOR_RED, globals->tohex(this->pLuaInterfaceServer) } });
-	globals->msgn();
+	Color addressColor = pObject == nullptr ? COLOR_RED : COLOR_BLUE;
 
-	globals->msgc({ { COLOR_WHITE, "Menu Lua State: " }, { this->pLuaInterfaceMenu ? COLOR_BLUE : COLOR_RED, globals->tohex(this->pLuaInterfaceMenu) } });
+	globals->msgc({ { COLOR_WHITE, name }, { addressColor, globals->tohex(pObject) } });
 	globals->msgn();
 }
 
