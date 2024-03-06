@@ -1,8 +1,8 @@
 PROJECT_GENERATOR_VERSION = 3
 
-include("./garrysmod_common")
-CreateWorkspace({name = "wwwwwh", abi_compatible = false, path = "projects/"})
-	CreateProject({serverside = false, source_path = "src", manual_files = false})
+include("../garrysmod_common")
+CreateWorkspace({name = "wwwwwh", abi_compatible = false, path = "../projects/"})
+	CreateProject({serverside = false, source_path = "../src", manual_files = false})
 		cppdialect "c++20"
 
 		links { "d3d9", "dxgi", "d3dcompiler" }
@@ -21,5 +21,5 @@ CreateWorkspace({name = "wwwwwh", abi_compatible = false, path = "projects/"})
 		IncludeSteamAPI()
 
 		files({
-			"src/**.*"
+			"../src/**.*"
 		})

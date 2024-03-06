@@ -1,3 +1,3 @@
 @echo off
-start projects/wwwwwh.sln
+start ../projects/wwwwwh.sln
 exit
