@@ -1,6 +1,7 @@
 #include "wwwwwh/hooks/hooks.h"
 #include "wwwwwh/hooks/hooks/reset.h"
 #include "wwwwwh/hooks/hooks/endscene.h"
+#include "wwwwwh/hooks/hooks/imguirender.h"
 
 #include "wwwwwh/globals.h"
 
@@ -40,6 +41,7 @@ void Hooks::setup()
 
 	this->addhook(new HookReset(), "Reset");
 	this->addhook(new HookEndScene(), "EndScene");
+	this->addhook(new HookImGuiRender(), "ImGuiRender");
 }
 
 void Hooks::destroy()

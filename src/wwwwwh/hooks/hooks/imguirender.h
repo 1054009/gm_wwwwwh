@@ -1,0 +1,11 @@
+#pragma once
+
+#include "wwwwwh/hooks/hooks.h"
+
+class HookImGuiRender : public BaseHook
+{
+public:
+	void setup();
+	void run();
+	void destroy();
+};
