@@ -24,6 +24,11 @@ void HookReset::setup()
 	kiero::bind(16, (void**)&oReset, hkReset);
 }
 
+void HookReset::run()
+{
+
+}
+
 void HookReset::destroy()
 {
 	kiero::unbind(16);

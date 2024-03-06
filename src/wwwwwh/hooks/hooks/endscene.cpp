@@ -37,6 +37,8 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
+	globals->pHooks->runhooks("ImGuiRender");
+
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
@@ -47,6 +49,11 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 void HookEndScene::setup()
 {
 	kiero::bind(42, (void**)&oEndScene, hkEndScene);
+}
+
+void HookEndScene::run()
+{
+
 }
 
 void HookEndScene::destroy()

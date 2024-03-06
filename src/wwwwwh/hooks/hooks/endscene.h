@@ -6,5 +6,6 @@ class HookEndScene : public BaseHook
 {
 public:
 	void setup();
+	void run();
 	void destroy();
 };

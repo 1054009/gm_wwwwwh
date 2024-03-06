@@ -6,13 +6,12 @@
 
 #include "wwwwwh/includes/kiero/kiero.h"
 
-BaseHook* Hooks::addhook(BaseHook* pHook)
+void Hooks::addhook(BaseHook* pHook, std::string name)
 {
+	pHook->name = name;
 	pHook->setup();
 	
 	this->hooks.push_back(pHook);
-
-	return pHook;
 }
 
 BaseHook* Hooks::findhook(std::string name)
@@ -24,6 +23,13 @@ BaseHook* Hooks::findhook(std::string name)
 	return nullptr;
 }
 
+void Hooks::runhooks(std::string name)
+{
+	for (BaseHook* pHook : this->hooks)
+		if (pHook->name == name)
+			pHook->run();
+}
+
 void Hooks::setup()
 {
 	if (kiero::init(kiero::RenderType::D3D9) != kiero::Status::Success)
@@ -32,8 +38,8 @@ void Hooks::setup()
 		globals->msgn();
 	}
 
-	this->addhook(new HookReset())->name = "Reset";
-	this->addhook(new HookEndScene())->name = "EndScene";
+	this->addhook(new HookReset(), "Reset");
+	this->addhook(new HookEndScene(), "EndScene");
 }
 
 void Hooks::destroy()

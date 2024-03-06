@@ -6,5 +6,6 @@ class HookReset : public BaseHook
 {
 public:
 	void setup();
+	void run();
 	void destroy();
 };
