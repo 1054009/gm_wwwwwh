@@ -26,6 +26,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 		pDevice->GetCreationParameters(&creationParameters);
 
 		ImGui::CreateContext();
+		ImGui::StyleColorsClassic();
 
 		ImGui_ImplWin32_Init(creationParameters.hFocusWindow);
 		ImGui_ImplDX9_Init(pDevice);
