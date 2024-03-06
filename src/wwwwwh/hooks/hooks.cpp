@@ -64,6 +64,7 @@ void Hooks::setup()
 	this->addhook(new HookEndScene(), "EndScene");
 	this->addhook(new HookImGuiRender(), "ImGuiRender");
 	this->addhook(new HookWndProc(), "WndProc");
+	this->addhook(new HookLockCursor(), "LockCursor");
 
 	MH_EnableHook(MH_ALL_HOOKS);
 }
