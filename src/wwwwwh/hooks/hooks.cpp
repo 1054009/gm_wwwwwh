@@ -28,8 +28,13 @@ BaseHook* Hooks::findhook(std::string name)
 void Hooks::runhooks(std::string name)
 {
 	for (BaseHook* pHook : this->hooks)
+	{
+		if (!pHook)
+			continue;
+
 		if (pHook->name == name)
 			pHook->run();
+	}
 }
 
 void Hooks::setup()
