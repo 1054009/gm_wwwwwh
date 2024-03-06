@@ -2,6 +2,7 @@
 
 #include <GarrysMod/Lua/LuaShared.h>
 #include <GarrysMod/Lua/LuaInterface.h>
+#include <vgui/ISurfaceV30.h>
 
 class Pointers
 {
@@ -14,6 +15,8 @@ public:
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceClient = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceServer = nullptr;
 	GarrysMod::Lua::ILuaInterface* pLuaInterfaceMenu = nullptr;
+
+	ISurfaceV30::ISurface* pSurface = nullptr;
 
 	void msgaddress(std::string name, void* pObject);
 

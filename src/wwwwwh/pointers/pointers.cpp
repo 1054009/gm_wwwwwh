@@ -7,27 +7,31 @@
 #include <string>
 
 #define LUA_SHARED_INTERFACE_VERSION "LUASHARED003"
+#define VGUI_SURFACE_INTERFACE_VERSION "VGUI_Surface030"
 
 void Pointers::setup()
 {
-	// Get Lua Shared
 	SourceSDK::FactoryLoader factory_LuaShared("lua_shared");
-	GarrysMod::Lua::ILuaShared* pLuaShared = factory_LuaShared.GetInterface<GarrysMod::Lua::ILuaShared>(LUA_SHARED_INTERFACE_VERSION);
+	this->pLuaShared = factory_LuaShared.GetInterface<GarrysMod::Lua::ILuaShared>(LUA_SHARED_INTERFACE_VERSION);
 
-	assert(pLuaShared);
+	SourceSDK::FactoryLoader factory_Surface("vguimatsurface");
+	this->pSurface = factory_Surface.GetInterface< ISurfaceV30::ISurface>(VGUI_SURFACE_INTERFACE_VERSION);
 
-	this->pLuaShared = pLuaShared;
+	// These should always exist
+	assert(this->pLuaShared);
+	assert(this->pSurface);
 
 	// Get the interfaces
-	this->pLuaInterfaceClient = pLuaShared->GetLuaInterface(lua_interface::client);
-	this->pLuaInterfaceServer = pLuaShared->GetLuaInterface(lua_interface::server);
-	this->pLuaInterfaceMenu = pLuaShared->GetLuaInterface(lua_interface::menu);
+	this->pLuaInterfaceClient = this->pLuaShared->GetLuaInterface(lua_interface::client);
+	this->pLuaInterfaceServer = this->pLuaShared->GetLuaInterface(lua_interface::server);
+	this->pLuaInterfaceMenu = this->pLuaShared->GetLuaInterface(lua_interface::menu);
 
 	// Fun facts
-	this->msgaddress("Lua Shared", pLuaShared);
+	this->msgaddress("Lua Shared", this->pLuaShared);
 	this->msgaddress("Client Lua State", this->pLuaInterfaceClient);
 	this->msgaddress("Server Lua State", this->pLuaInterfaceServer);
 	this->msgaddress("Menu Lua State", this->pLuaInterfaceMenu);
+	this->msgaddress("VGUI Surface", this->pSurface);
 }
 
 void Pointers::destroy()
