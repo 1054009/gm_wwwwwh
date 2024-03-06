@@ -18,8 +18,6 @@ class Hooks
 public:
 	std::vector<BaseHook*> hooks;
 
-	template<typename T> T getvfunc(const void* pTarget, int index);
-
 	void addhook(BaseHook* pHook, std::string name);
 	BaseHook* findhook(std::string name);
 	void runhooks(std::string name);

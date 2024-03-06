@@ -3,6 +3,7 @@
 #include "wwwwwh/hooks/hooks/endscene.h"
 #include "wwwwwh/hooks/hooks/imguirender.h"
 #include "wwwwwh/hooks/hooks/wndproc.h"
+#include "wwwwwh/hooks/hooks/lockcursor.h"
 
 #include "wwwwwh/globals.h"
 
@@ -10,11 +11,6 @@
 #include "MinHook.h"
 
 #include <format>
-
-template<typename T> T Hooks::getvfunc(const void* pTarget, int index)
-{
-	return (T)* (*(const void***)pTarget + index);
-}
 
 void Hooks::addhook(BaseHook* pHook, std::string name)
 {
