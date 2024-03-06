@@ -15,8 +15,8 @@ LRESULT CALLBACK hkWndProc(HWND hWindow, UINT uMsg, WPARAM wParam, LPARAM lParam
 	LibraryImGui* pLibraryImGui = (LibraryImGui*)globals->pLibrary->findlibrary("ImGui");
 	if (pLibraryImGui && pLibraryImGui->grabInput)
 	{
-		if (ImGui_ImplWin32_WndProcHandler(hWindow, uMsg, wParam, lParam))
-			return 1L;
+		ImGui_ImplWin32_WndProcHandler(hWindow, uMsg, wParam, lParam);
+		return true;
 	}
 
 	return CallWindowProc(oWndProc, hWindow, uMsg, wParam, lParam);
