@@ -32,8 +32,11 @@ void wwwwwh::destroy()
 	this->pPointers->destroy();
 
 	this->pLibrary->popfrominterface();
+	delete this->pLibrary;
 
 	this->pHooks->destroy();
+
+	delete this;
 }
 
 std::string wwwwwh::tohex(void* pBlob)

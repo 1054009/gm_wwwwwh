@@ -33,6 +33,7 @@ void Pointers::setup()
 void Pointers::destroy()
 {
 	// Maybe something at some point
+	delete this;
 }
 
 void Pointers::msgaddress(std::string name, void* pObject)

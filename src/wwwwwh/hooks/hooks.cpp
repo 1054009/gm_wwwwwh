@@ -49,4 +49,6 @@ void Hooks::setup()
 void Hooks::destroy()
 {
 	kiero::shutdown();
+
+	delete this;
 }
