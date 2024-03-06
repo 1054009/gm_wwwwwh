@@ -8,12 +8,17 @@
 
 #include "wwwwwh/includes/kiero/kiero.h"
 
+#include <format>
+
 void Hooks::addhook(BaseHook* pHook, std::string name)
 {
 	pHook->name = name;
 	pHook->setup();
 	
 	this->hooks.push_back(pHook);
+
+	globals->msgc({ { COLOR_WHITE, std::format("Hooked {}", pHook->name) } });
+	globals->msgn();
 }
 
 BaseHook* Hooks::findhook(std::string name)
@@ -56,6 +61,10 @@ void Hooks::destroy()
 	for (BaseHook* pHook : this->hooks)
 	{
 		pHook->destroy();
+
+		globals->msgc({ { COLOR_WHITE, std::format("Unhooked {}", pHook->name) } });
+		globals->msgn();
+
 		delete pHook;
 	}
 
