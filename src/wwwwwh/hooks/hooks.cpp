@@ -2,6 +2,7 @@
 #include "wwwwwh/hooks/hooks/reset.h"
 #include "wwwwwh/hooks/hooks/endscene.h"
 #include "wwwwwh/hooks/hooks/imguirender.h"
+#include "wwwwwh/hooks/hooks/wndproc.h"
 
 #include "wwwwwh/globals.h"
 
@@ -42,6 +43,7 @@ void Hooks::setup()
 	this->addhook(new HookReset(), "Reset");
 	this->addhook(new HookEndScene(), "EndScene");
 	this->addhook(new HookImGuiRender(), "ImGuiRender");
+	this->addhook(new HookWndProc(), "WndProc");
 }
 
 void Hooks::destroy()
