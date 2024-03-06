@@ -35,6 +35,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 		initialized = true;
 	}
 
+	// Setup render state
 	DWORD writeColor, writeSRGB;
 	pDevice->GetRenderState(D3DRS_COLORWRITEENABLE, &writeColor);
 	pDevice->GetRenderState(D3DRS_SRGBWRITEENABLE, &writeSRGB);
@@ -42,6 +43,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0xFFFFFFFF);
 	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, false);
 
+	// Setup IO
 	ImGuiIO& io = ImGui::GetIO();
 
 	LibraryImGui* pLibraryImGui = (LibraryImGui*)globals->pLibrary->findlibrary("ImGui");
@@ -50,6 +52,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	else
 		io.MouseDrawCursor = false;
 
+	// Render the frame
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -60,6 +63,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 
+	// Restore
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, writeColor);
 	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, writeSRGB);
 
