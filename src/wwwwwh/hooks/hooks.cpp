@@ -7,6 +7,7 @@
 #include "wwwwwh/globals.h"
 
 #include "wwwwwh/includes/kiero/kiero.h"
+#include "MinHook.h"
 
 #include <format>
 
@@ -50,10 +51,20 @@ void Hooks::setup()
 		globals->msgn();
 	}
 
+	if (MH_Initialize() != MH_STATUS::MH_OK)
+	{
+		globals->msgc({ { COLOR_RED, "Failed to initialize MinHook!" } });
+		globals->msgn();
+
+		return;
+	}
+
 	this->addhook(new HookReset(), "Reset");
 	this->addhook(new HookEndScene(), "EndScene");
 	this->addhook(new HookImGuiRender(), "ImGuiRender");
 	this->addhook(new HookWndProc(), "WndProc");
+
+	MH_EnableHook(MH_ALL_HOOKS);
 }
 
 void Hooks::destroy()
@@ -69,6 +80,9 @@ void Hooks::destroy()
 	}
 
 	kiero::shutdown();
+
+	MH_DisableHook(MH_ALL_HOOKS);
+	MH_Uninitialize();
 
 	delete this;
 }
