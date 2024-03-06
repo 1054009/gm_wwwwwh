@@ -7,18 +7,18 @@ CreateWorkspace({name = "wwwwwh", abi_compatible = false, path = "../projects/"}
 
 		links { "d3d9", "dxgi", "d3dcompiler" }
 
-		IncludeHelpersExtended()
+		--IncludeHelpersExtended()
 		IncludeLuaShared()
 		IncludeDetouring()
-		IncludeScanning()
+		-- IncludeScanning()
 		IncludeSDKCommon()
 		IncludeSDKTier0()
-		IncludeSDKTier1()
-		IncludeSDKTier2()
-		IncludeSDKTier3()
-		IncludeSDKMathlib()
-		IncludeSDKRaytrace()
-		IncludeSteamAPI()
+		-- IncludeSDKTier1()
+		-- IncludeSDKTier2()
+		-- IncludeSDKTier3()
+		-- IncludeSDKMathlib()
+		-- IncludeSDKRaytrace()
+		-- IncludeSteamAPI()
 
 		files({
 			"../src/**.*"
