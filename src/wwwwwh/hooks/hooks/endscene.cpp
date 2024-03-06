@@ -32,6 +32,10 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 		ImGui_ImplWin32_Init(creationParameters.hFocusWindow);
 		ImGui_ImplDX9_Init(pDevice);
 
+		ImGuiIO& io = ImGui::GetIO();
+		io.LogFilename = NULL;
+		io.IniFilename = NULL;
+
 		initialized = true;
 	}
 
