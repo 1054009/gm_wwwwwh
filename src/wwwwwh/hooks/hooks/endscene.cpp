@@ -1,6 +1,7 @@
 #include "wwwwwh/hooks/hooks/endscene.h"
 
 #include "wwwwwh/globals.h"
+#include "wwwwwh/library/imgui/imgui.h"
 
 #include <d3d9.h>
 #include <d3d9types.h>
@@ -40,6 +41,14 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0xFFFFFFFF);
 	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, false);
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	LibraryImGui* pLibraryImGui = (LibraryImGui*)globals->pLibrary->findlibrary("ImGui");
+	if (pLibraryImGui)
+		io.MouseDrawCursor = pLibraryImGui->grabInput;
+	else
+		io.MouseDrawCursor = false;
 
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
