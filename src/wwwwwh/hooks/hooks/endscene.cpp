@@ -34,6 +34,13 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 		initialized = true;
 	}
 
+	DWORD writeColor, writeSRGB;
+	pDevice->GetRenderState(D3DRS_COLORWRITEENABLE, &writeColor);
+	pDevice->GetRenderState(D3DRS_SRGBWRITEENABLE, &writeSRGB);
+
+	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, 0xFFFFFFFF);
+	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, false);
+
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -43,6 +50,9 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, writeColor);
+	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, writeSRGB);
 
 	return oEndScene(pDevice);
 }
