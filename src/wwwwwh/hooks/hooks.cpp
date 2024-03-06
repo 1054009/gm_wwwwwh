@@ -11,6 +11,11 @@
 
 #include <format>
 
+template<typename T> T Hooks::getvfunc(const void* pTarget, int index)
+{
+	return (T)* (*(const void***)pTarget + index);
+}
+
 void Hooks::addhook(BaseHook* pHook, std::string name)
 {
 	pHook->name = name;
