@@ -29,12 +29,12 @@ void wwwwwh::destroy()
 
 	assert(pInterface);
 
-	this->pPointers->destroy();
-
 	this->pLibrary->popfrominterface();
 	delete this->pLibrary;
 
 	this->pHooks->destroy();
+
+	this->pPointers->destroy();
 
 	delete this;
 }
