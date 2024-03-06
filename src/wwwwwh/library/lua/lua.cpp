@@ -55,6 +55,12 @@ LUA_FUNCTION(RunInterfaceString)
 	return 0;
 }
 
+LUA_FUNCTION(GetRegistry)
+{
+	LUA->PushSpecial(GarrysMod::Lua::SPECIAL_REG);
+	return 1;
+}
+
 void LibraryLua::setup()
 {
 
@@ -72,6 +78,7 @@ void LibraryLua::push()
 		this->pushnumber(lua_interface::server, "LUA_INTERFACE_SERVER");
 
 		this->pushcfunction(RunInterfaceString, "RunInterfaceString");
+		this->pushcfunction(GetRegistry, "GetRegistry");
 	}
 	pInterface->RawSet(-3);
 }
