@@ -5,11 +5,13 @@
 
 #include <any>
 #include <functional>
+#include <string>
 #include <vector>
 
 class BaseLibrary
 {
 public:
+	std::string name;
 	GarrysMod::Lua::ILuaInterface* pInterface;
 
 	void pushcfunction(GarrysMod::Lua::CFunc function, const char* szName);
@@ -31,7 +33,8 @@ public:
 
 	std::vector<BaseLibrary*> libraries;
 
-	void addlibrary(BaseLibrary* library);
+	void addlibrary(BaseLibrary* library, std::string name);
+	BaseLibrary* findlibrary(std::string name);
 	void setup();
 
 	void pushcfunction(GarrysMod::Lua::CFunc function, const char* szName);

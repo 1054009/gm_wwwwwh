@@ -4,21 +4,34 @@
 #include "wwwwwh/library/io/io.h"
 #include "wwwwwh/library/lua/lua.h"
 #include "wwwwwh/library/module/module.h"
+#include "wwwwwh/library/imgui/imgui.h"
 
-void LibraryController::addlibrary(BaseLibrary* library)
+void LibraryController::addlibrary(BaseLibrary* library, std::string name)
 {
+	library->name = name;
+
 	library->setinterface(this->pInterface);
 	library->setup();
 
 	this->libraries.push_back(library);
 }
 
+BaseLibrary* LibraryController::findlibrary(std::string name)
+{
+	for (BaseLibrary* pLibrary : this->libraries)
+		if (pLibrary->name == name)
+			return pLibrary;
+
+	return nullptr;
+}
+
 void LibraryController::setup()
 {
 	// Initialize the libraries
-	this->addlibrary(new LibraryIO());
-	this->addlibrary(new LibraryLua());
-	this->addlibrary(new LibraryModule());
+	this->addlibrary(new LibraryIO(), "IO");
+	this->addlibrary(new LibraryLua(), "Lua");
+	this->addlibrary(new LibraryModule(), "Module");
+	this->addlibrary(new LibraryImGui(), "ImGui");
 }
 
 void LibraryController::pushcfunction(GarrysMod::Lua::CFunc function, const char* szName)
