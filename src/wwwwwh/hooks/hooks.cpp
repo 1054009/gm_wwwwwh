@@ -48,6 +48,12 @@ void Hooks::setup()
 
 void Hooks::destroy()
 {
+	for (BaseHook* pHook : this->hooks)
+	{
+		pHook->destroy();
+		delete pHook;
+	}
+
 	kiero::shutdown();
 
 	delete this;
