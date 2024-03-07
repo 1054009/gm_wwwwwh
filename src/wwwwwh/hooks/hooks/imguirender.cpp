@@ -17,12 +17,14 @@ void HookImGuiRender::run()
 	{
 		std::vector<ImGuiObject*> objects = pLibraryImGui->objects;
 
-		for (ImGuiObject* pObject : objects) // Start all the objects
+		// Start all the objects
+		for (ImGuiObject* pObject : objects)
 			pObject->startrender();
 
-		// Right here objects can be rendered inside of other objects
+		// Objects can now be rendered inside of other objects
 
-		for (auto pIterator = objects.rbegin(); pIterator != objects.rend(); ++pIterator) // End them all in reverse order to properly close them off
+		// End them all in reverse order to properly close them off
+		for (auto pIterator = objects.rbegin(); pIterator != objects.rend(); ++pIterator)
 		{
 			ImGuiObject* pObject = (ImGuiObject*)(*pIterator);
 

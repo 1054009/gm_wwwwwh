@@ -10,6 +10,7 @@ class LibraryImGui : public BaseLibrary
 {
 public:
 	bool grabInput = false;
+	bool cursorVisible = false;
 	std::vector<ImGuiObject*> objects;
 
 	void addobject(ImGuiObject* pObject);

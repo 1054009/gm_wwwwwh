@@ -13,7 +13,7 @@ static WNDPROC oWndProc = NULL;
 LRESULT CALLBACK hkWndProc(HWND hWindow, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	LibraryImGui* pLibraryImGui = (LibraryImGui*)globals->pLibrary->findlibrary("ImGui");
-	if (pLibraryImGui && pLibraryImGui->grabInput)
+	if (pLibraryImGui && (pLibraryImGui->grabInput || pLibraryImGui->cursorVisible))
 	{
 		ImGui_ImplWin32_WndProcHandler(hWindow, uMsg, wParam, lParam);
 		return true;
