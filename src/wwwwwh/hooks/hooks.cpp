@@ -3,7 +3,7 @@
 #include "wwwwwh/hooks/hooks/endscene.h"
 #include "wwwwwh/hooks/hooks/imguirender.h"
 #include "wwwwwh/hooks/hooks/wndproc.h"
-#include "wwwwwh/hooks/hooks/lockcursor.h"
+#include "wwwwwh/hooks/hooks/cursor.h"
 
 #include "wwwwwh/globals.h"
 
@@ -64,7 +64,7 @@ void Hooks::setup()
 	this->addhook(new HookEndScene(), "EndScene");
 	this->addhook(new HookImGuiRender(), "ImGuiRender");
 	this->addhook(new HookWndProc(), "WndProc");
-	this->addhook(new HookLockCursor(), "LockCursor");
+	this->addhook(new HookCursor(), "LockCursor");
 
 	MH_EnableHook(MH_ALL_HOOKS);
 }

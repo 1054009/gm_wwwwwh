@@ -2,7 +2,7 @@
 
 #include "wwwwwh/hooks/hooks.h"
 
-class HookLockCursor : public BaseHook
+class HookCursor : public BaseHook
 {
 public:
 	void setup();
