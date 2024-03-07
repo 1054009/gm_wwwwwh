@@ -63,6 +63,9 @@ void LibraryImGui::addobject(ImGuiObject* pObject)
 
 void LibraryImGui::clearobjects()
 {
+	for (ImGuiObject* pObject : this->objects)
+		delete pObject;
+
 	this->objects.clear();
 }
 
