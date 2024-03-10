@@ -14,6 +14,12 @@ static EndScene oEndScene = NULL;
 
 long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 {
+	static const void* pReturnAddress = _ReturnAddress();
+	long lResult = oEndScene(pDevice);
+
+	if (_ReturnAddress() == pReturnAddress)
+		return lResult;
+
 	static bool initialized = false;
 
 	if (!initialized)
@@ -71,7 +77,7 @@ long __stdcall hkEndScene(IDirect3DDevice9* pDevice)
 	pDevice->SetRenderState(D3DRS_COLORWRITEENABLE, writeColor);
 	pDevice->SetRenderState(D3DRS_SRGBWRITEENABLE, writeSRGB);
 
-	return oEndScene(pDevice);
+	return lResult;
 }
 
 void HookEndScene::setup()
