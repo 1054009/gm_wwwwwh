@@ -110,6 +110,7 @@ void LibraryController::popfrominterface()
 			});
 	}
 	pInterface->Pop();
+	pInterface->ReferenceFree(this->libraryReference);
 
 	globals->msgc({ { COLOR_WHITE, "Emptied library" } });
 	globals->msgn();
