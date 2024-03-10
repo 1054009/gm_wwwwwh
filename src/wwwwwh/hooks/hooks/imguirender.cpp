@@ -15,23 +15,8 @@ void HookImGuiRender::run()
 	LibraryImGui* pLibraryImGui = (LibraryImGui*)globals->pLibrary->findlibrary("ImGui");
 	if (pLibraryImGui)
 	{
-		std::vector<ImGuiObject*> objects = pLibraryImGui->objects;
-
-		// Start all the objects
-		for (ImGuiObject* pObject : objects)
-			pObject->startrender();
-
-		// Objects can now be rendered inside of other objects
-
-		// End them all in reverse order to properly close them off
-		for (auto pIterator = objects.rbegin(); pIterator != objects.rend(); ++pIterator)
-		{
-			ImGuiObject* pObject = (ImGuiObject*)(*pIterator);
-
-			pObject->endrender();
-		}
-
-		pLibraryImGui->clearobjects();
+		pLibraryImGui->runfunctions();
+		pLibraryImGui->clearfunctions();
 
 		// Reset input
 		pLibraryImGui->grabInput = false;

@@ -2,7 +2,8 @@
 
 #include "wwwwwh/globals.h"
 
-#include "wwwwwh/library/imgui/objects/window.h"
+#include "wwwwwh/library/imgui/functions/begin.hpp"
+#include "wwwwwh/library/imgui/functions/end.hpp"
 
 bool grablibrary(LibraryImGui*& target)
 {
@@ -41,37 +42,78 @@ LUA_FUNCTION(GetGrabInput)
 	return 1;
 }
 
-LUA_FUNCTION(CreateWindow)
+/*
+*
+*
+*	Holy mother of god
+* 
+*/
+LUA_FUNCTION(Begin)
 {
-	const char* title = LUA->CheckString(1);
-
 	LibraryImGui* pLibraryImGui;
 	if (grablibrary(pLibraryImGui))
 	{
-		ImGuiObject_Window* pWindow = new ImGuiObject_Window(title);
+		std::string title = LUA->CheckString(1);
 
-		pLibraryImGui->addobject(pWindow);
+		ImGuiFunctionBegin* pBegin = new ImGuiFunctionBegin();
+		if (!pBegin)
+		{
+			LUA->ThrowError("Failed to create function!");
+			return 0;
+		}
+
+		pBegin->name = title;
+
+		pLibraryImGui->addfunction(pBegin);
 	}
+	else
+		LUA->ThrowError("Failed to find library!");
 
 	return 0;
 }
 
-void LibraryImGui::addobject(ImGuiObject* pObject)
+LUA_FUNCTION(End)
 {
-	this->objects.push_back(pObject);
+	LibraryImGui* pLibraryImGui;
+	if (grablibrary(pLibraryImGui))
+	{
+		ImGuiFunctionEnd* pEnd = new ImGuiFunctionEnd();
+		if (!pEnd)
+		{
+			LUA->ThrowError("Failed to create function!");
+			return 0;
+		}
+
+		pLibraryImGui->addfunction(pEnd);
+	}
+	else
+		LUA->ThrowError("Failed to find library!");
+
+	return 0;
 }
 
-void LibraryImGui::clearobjects()
+void LibraryImGui::addfunction(ImGuiFunction* pFunction)
 {
-	for (ImGuiObject* pObject : this->objects)
-		delete pObject;
+	this->functions.push_back(pFunction);
+}
 
-	this->objects.clear();
+void LibraryImGui::clearfunctions()
+{
+	for (ImGuiFunction* pFunction : this->functions)
+		delete pFunction;
+
+	this->functions.clear();
+}
+
+void LibraryImGui::runfunctions()
+{
+	for (ImGuiFunction* pFunction : this->functions)
+		pFunction->call();
 }
 
 void LibraryImGui::setup()
 {
-	this->clearobjects();
+	this->clearfunctions();
 }
 
 void LibraryImGui::push()
@@ -84,7 +126,8 @@ void LibraryImGui::push()
 		this->pushcfunction(SetGrabInput, "SetGrabInput");
 		this->pushcfunction(GetGrabInput, "GetGrabInput");
 
-		this->pushcfunction(CreateWindow, "CreateWindow");
+		this->pushcfunction(Begin, "Begin");
+		this->pushcfunction(End, "End");
 	}
 	pInterface->RawSet(-3);
 }
