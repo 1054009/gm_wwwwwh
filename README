@@ -1,0 +1,15 @@
+=================
+    gm_wwwwwh
+=================
+
+A Garry's Mod "utility" module.
+
+Features:
+- ImGui interface creation (WIP)
+- IO library with access to any file/directory
+- Run Lua code in any Lua state (Client, Menu and Server)
+- Module unloading
+- Ability to access process information (WIP)
+- Ability to access system information (WIP)
+
+Currently only supports x64 client state. Menu state support is planned.
