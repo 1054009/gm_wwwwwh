@@ -3,6 +3,7 @@
 #include <Windows.h>
 
 #undef MessageBox // Thanks!
+
 LUA_FUNCTION(MessageBox)
 {
 	const char* title = LUA->CheckString(1);
