@@ -2,6 +2,7 @@
 
 #include "wwwwwh/globals.h"
 
+#include "lua.hpp"
 #include <format>
 #include <string>
 
@@ -61,6 +62,48 @@ LUA_FUNCTION(GetRegistry)
 	return 1;
 }
 
+LUA_FUNCTION(GetUpValue)
+{
+	LUA->CheckType(1, GarrysMod::Lua::Type::Function);
+	int index = LUA->CheckNumber(2);
+
+	GarrysMod::Lua::ILuaInterface* LUA_INTERFACE = (GarrysMod::Lua::ILuaInterface*)LUA;
+
+	const char* name;
+
+	if (name = LUA_INTERFACE->GetUpvalue(1, index))
+	{
+		LUA->PushString(name);
+		LUA->Insert(-2);
+
+		return 2;
+	}
+
+	return 0;
+}
+
+LUA_FUNCTION(SetUpValue)
+{
+	LUA->CheckType(1, GarrysMod::Lua::Type::Function);
+	int index = LUA->CheckNumber(2);
+
+	GarrysMod::Lua::ILuaInterface* LUA_INTERFACE = (GarrysMod::Lua::ILuaInterface*)LUA;
+
+	const char* name;
+
+	if (name = LUA_INTERFACE->GetUpvalue(1, index))
+	{
+		LUA->Push(3);
+		lua_setupvalue(LUA->GetState(), 1, index);
+
+		LUA->PushString(name);
+		return 1;
+	}
+
+	LUA->PushNil();
+	return 1;
+}
+
 void LibraryLua::setup()
 {
 
@@ -79,6 +122,8 @@ void LibraryLua::push()
 
 		this->pushcfunction(RunInterfaceString, "RunInterfaceString");
 		this->pushcfunction(GetRegistry, "GetRegistry");
+		this->pushcfunction(GetUpValue, "GetUpValue");
+		this->pushcfunction(SetUpValue, "SetUpValue");
 	}
 	pInterface->RawSet(-3);
 }
