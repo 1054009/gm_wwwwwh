@@ -5,6 +5,7 @@
 #include "wwwwwh/library/lua/lua.h"
 #include "wwwwwh/library/module/module.h"
 #include "wwwwwh/library/imgui/imgui.h"
+#include "wwwwwh/library/system/system.h"
 
 void LibraryController::addlibrary(BaseLibrary* library, std::string name)
 {
@@ -32,6 +33,7 @@ void LibraryController::setup()
 	this->addlibrary(new LibraryLua(), "Lua");
 	this->addlibrary(new LibraryModule(), "Module");
 	this->addlibrary(new LibraryImGui(), "ImGui");
+	this->addlibrary(new LibrarySystem(), "System");
 }
 
 void LibraryController::pushcfunction(GarrysMod::Lua::CFunc function, const char* szName)
